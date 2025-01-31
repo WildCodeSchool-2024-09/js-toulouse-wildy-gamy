@@ -224,7 +224,16 @@ const edit: RequestHandler = async (req, res, next) => {
 
 const destroy: RequestHandler = async (req, res, next) => {
   try {
-    res.status(501).json({ error: "Delete operation not implemented" });
+    const { id } = req.params;
+
+    const success = await userRepository.delete(Number(id));
+
+    if (!success) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

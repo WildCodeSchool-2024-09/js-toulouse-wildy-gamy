@@ -88,12 +88,12 @@
 }
 
 .room-gamecard {
-  min-width: 200px;
+  width: 200px;
   position: relative;
 }
 
 .room-gameimage {
-  width: 110%;
+  width: 200px;
   height: 200px;
   border-radius: 10px;
   border: #c3b0ea 1px solid;

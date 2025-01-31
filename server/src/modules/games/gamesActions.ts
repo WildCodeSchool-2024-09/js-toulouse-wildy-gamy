@@ -22,6 +22,31 @@ const browseAvailable: RequestHandler = async (req, res, next) => {
   }
 };
 
+const browseNew: RequestHandler = async (req, res, next) => {
+  try {
+    const games = await gamesRepository.readallNew();
+
+    res.json(games);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const toggleNew: RequestHandler = async (req, res, next) => {
+  try {
+    const gameId = Number(req.params.id);
+    const { isNew } = req.body;
+    const affectedRows = await gamesRepository.toggleNew(gameId, isNew);
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const read: RequestHandler = async (req, res, next) => {
   try {
     const gamesId = Number(req.params.id);
@@ -60,6 +85,7 @@ const edit: RequestHandler = async (req, res, next) => {
       price: req.body.price,
       image: req.body.image,
       is_available: req.body.is_available,
+      is_new: req.body.is_new,
     };
     const affectedRows = await gamesRepository.update(games);
     if (affectedRows === 0) {
@@ -90,6 +116,7 @@ const add: RequestHandler = async (req, res, next) => {
       price: req.body.price,
       image: req.body.image,
       is_available: req.body.is_available,
+      is_new: req.body.is_new,
     };
     const insertId = await gamesRepository.create(games);
     res.status(201).json({ id: insertId });
@@ -101,9 +128,11 @@ const add: RequestHandler = async (req, res, next) => {
 export default {
   browse,
   browseAvailable,
+  browseNew,
   read,
   updateAvailability,
   edit,
   destroy,
   add,
+  toggleNew,
 };

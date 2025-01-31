@@ -83,7 +83,8 @@
   flex: 1;
 }
 
-.logout-button {
+.logout-button,
+.vueUser-button {
   display: flex;
   align-items: center;
   padding: 15px;
@@ -96,12 +97,14 @@
   margin-top: auto;
 }
 
-.logout-button img {
+.logout-button img,
+.vueUser-button img {
   width: 30px;
   height: 30px;
 }
 
-.logout-button span {
+.logout-button span,
+.vueUser-button span {
   margin-left: 1rem;
   transition: opacity 0.3s ease;
 }

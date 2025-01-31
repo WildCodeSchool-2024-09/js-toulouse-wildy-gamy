@@ -90,7 +90,7 @@ const AdminUsers = () => {
       if (!user) return;
 
       const API_URL = import.meta.env.VITE_API_URL;
-      const response = await fetch(`${API_URL}/api/users/${id}/ban`, {
+      const response = await fetch(`${API_URL}/api/user/${id}/ban`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +119,7 @@ const AdminUsers = () => {
       if (!user) return;
 
       const API_URL = import.meta.env.VITE_API_URL;
-      const response = await fetch(`${API_URL}/api/users/${id}/admin`, {
+      const response = await fetch(`${API_URL}/api/user/${id}/admin`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

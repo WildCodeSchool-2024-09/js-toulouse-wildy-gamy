@@ -32,6 +32,7 @@ export interface BaseItem {
 
 export interface Game extends BaseItem {
   price: number;
+  is_new: boolean;
 }
 
 export interface Prize extends BaseItem {

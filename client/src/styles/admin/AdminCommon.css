@@ -212,7 +212,8 @@
   .admingrid-eye,
   .admingrid-pencil,
   .admingrid-trash,
-  .admingrid-ban {
+  .admingrid-ban,
+  .admingrid-sparkles {
     width: 22px;
     height: 22px;
     color: #e9d5ff;
@@ -220,10 +221,19 @@
     transition: color 0.2s ease;
   }
 
+  .admingrid-sparkles-new {
+    width: 22px;
+    height: 22px;
+    color: #db9e2b;
+    fill: #db9e2b;
+    filter: drop-shadow(0 0 10px #db9e2b);
+  }
+
   .admingrid-eye:hover,
   .admingrid-pencil:hover,
   .admingrid-trash:hover,
-  .admingrid-ban:hover {
+  .admingrid-ban:hover,
+  .admingrid-sparkles:hover {
     color: #ff4d9e;
   }
 

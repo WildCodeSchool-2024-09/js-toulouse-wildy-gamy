@@ -1,6 +1,7 @@
 import "../../styles/admin/AdminHome.css";
 import { Joystick, Trophy, Users } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import logoWG from "../../assets/images/logo_wildy_gamy.png";
 import SliderBarAdmin from "../../components/admin/SliderBarAdmin";
 
@@ -12,7 +13,9 @@ function AdminHome() {
 
   return (
     <div className="adminhome-container">
-      <img src={logoWG} alt="logo" className="adminhome-logo" />
+      <Link to="/">
+        <img src={logoWG} alt="logo" className="adminhome-logo" />
+      </Link>
       <SliderBarAdmin isOpen={isOpen} onToggle={handleSidebarToggle} />
       <div className={`main-content ${isOpen ? "main-content-shifted" : ""}`}>
         <div className="welcome-container">

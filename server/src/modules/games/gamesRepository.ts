@@ -8,6 +8,7 @@ export type Game = {
   price: number;
   image: string;
   is_available: boolean;
+  is_new: boolean;
 };
 
 export type CreateGame = Omit<Game, "id">;
@@ -36,6 +37,23 @@ class gamesRepository {
     );
 
     return rows as Game[];
+  }
+
+  async readallNew() {
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from game where is_new = 1 AND is_available = 1",
+    );
+
+    return rows as Game[];
+  }
+
+  async toggleNew(id: number, isNew: boolean) {
+    const [result] = await databaseClient.query<Result>(
+      "Update game set is_new = ? where id = ?",
+      [isNew, id],
+    );
+
+    return result.affectedRows;
   }
 
   async updateAvailability(id: number, isAvailable: boolean) {
@@ -72,8 +90,15 @@ class gamesRepository {
 
   async create(game: CreateGame) {
     const [result] = await databaseClient.query<Result>(
-      "insert into game (name, description, price, image, is_available) values (?, ?, ?, ?, ?)",
-      [game.name, game.description, game.price, game.image, game.is_available],
+      "insert into game (name, description, price, image, is_available, is_new) values (?, ?, ?, ?, ?,?)",
+      [
+        game.name,
+        game.description,
+        game.price,
+        game.image,
+        game.is_available,
+        game.is_new,
+      ],
     );
 
     return result.insertId;

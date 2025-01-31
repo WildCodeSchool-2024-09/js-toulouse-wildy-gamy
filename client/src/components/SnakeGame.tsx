@@ -11,6 +11,9 @@ import {
 } from "lucide-react";
 import React from "react";
 import "../styles/SnakeGame.css";
+import { useState } from "react";
+import { useAuth } from "../services/authContext";
+import GameLoginModal from "./GameLoginModal";
 
 type Position = {
   x: number;
@@ -71,6 +74,16 @@ export default function SnakeGame() {
   const [obstacleCoordinates, setObstacleCoordinates] = React.useState<
     Position[]
   >([]);
+  const { auth } = useAuth();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const handleStartGame = () => {
+    if (!auth) {
+      setIsLoginModalOpen(true);
+    } else {
+      restartGame();
+    }
+  };
 
   const generateRandomPosition = React.useCallback((): Position => {
     return {
@@ -423,10 +436,13 @@ export default function SnakeGame() {
           <button
             type="button"
             className="button primary"
-            onClick={restartGame}
+            onClick={handleStartGame}
           >
             Start Game
           </button>
+          {isLoginModalOpen && (
+            <GameLoginModal onClose={() => setIsLoginModalOpen(false)} />
+          )}
         </div>
       )}
 

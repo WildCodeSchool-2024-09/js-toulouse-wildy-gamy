@@ -55,10 +55,12 @@ router.put("/api/prizes/:id", prizeActions.edit);
 router.delete("/api/prizes/:id", prizeActions.destroy);
 
 router.get("/api/games/available", gameActions.browseAvailable);
+router.get("/api/games/new", gameActions.browseNew);
 router.get("/api/games", gameActions.browse);
 router.get("/api/games/:id", gameActions.read);
 router.post("/api/games", gameActions.add);
 router.patch("/api/games/:id/availability", gameActions.updateAvailability);
+router.put("/api/games/:id/new", gameActions.toggleNew);
 router.put("/api/games/:id", gameActions.edit);
 router.delete("/api/games/:id", gameActions.destroy);
 
@@ -66,8 +68,6 @@ router.get("/api/users", usersActions.browse);
 router.get("/api/users/:id", usersActions.read);
 router.post("/api/users", usersActions.add);
 router.put("/api/users/:id", usersActions.edit);
-router.put("/api/users/:id/ban", usersActions.toggleBan);
-router.put("/api/users/:id/admin", usersActions.toggleAdmin);
 router.delete("/api/users/:id", usersActions.destroy);
 
 router.get("/api/user/:id/favorites", favoritesActions.read);
@@ -83,6 +83,7 @@ router.put("/api/user/:id", userActions.edit);
 router.put("/api/user/:username", userActions.edit);
 router.put("/api/user/:id/ban", usersActions.toggleBan);
 router.put("/api/user/:id/admin", usersActions.toggleAdmin);
+router.delete("/api/user/:id", userActions.destroy);
 router.delete("/api/user/:username", userActions.destroy);
 router.post("/api/login", authActions.login);
 router.use("/api/*", authActions.verifyToken);

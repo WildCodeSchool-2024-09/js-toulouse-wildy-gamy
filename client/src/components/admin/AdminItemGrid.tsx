@@ -8,6 +8,7 @@ import {
   EyeClosed,
   PencilLine,
   Phone,
+  Sparkles,
   Tickets,
   Trash2,
 } from "lucide-react";
@@ -45,6 +46,8 @@ interface AdminItemGridProps<T> {
   isBanned?: boolean;
   isAdmin?: boolean;
   onAdmin?: (id: number) => void;
+  isNew?: boolean;
+  onNew?: (id: number) => void;
 }
 
 const AdminItemGrid = <T extends Game | Prize | User>({
@@ -60,6 +63,8 @@ const AdminItemGrid = <T extends Game | Prize | User>({
   isBanned,
   onAdmin,
   isAdmin,
+  onNew,
+  isNew,
 }: AdminItemGridProps<T>) => {
   const item = type === "game" ? game : type === "prize" ? prize : user;
   const [isAvailable, setIsAvailable] = useState(
@@ -118,6 +123,17 @@ const AdminItemGrid = <T extends Game | Prize | User>({
       : "🚫 Êtes-vous sûr de vouloir donner les droits d'administrateur à cet utilisateur ?";
     if (window.confirm(message)) {
       onAdmin?.(id);
+    }
+  };
+
+  const handleNew = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const message = isNew
+      ? "🎪 Le show est terminé, on retire l'étiquette nouveau ?"
+      : "✨ Hop hop hop ! On met ce jeu sous les projecteurs ?";
+    if (window.confirm(message) && onNew) {
+      onNew(id);
     }
   };
 
@@ -244,6 +260,20 @@ const AdminItemGrid = <T extends Game | Prize | User>({
       </div>
 
       <div className="admincard-buttons">
+        {type === "game" && onNew && (
+          <button
+            type="button"
+            className="admincard-button"
+            onClick={handleNew}
+            title={isNew ? "Retirer le tag nouveau" : "Mettre en avant"}
+          >
+            <Sparkles
+              className={
+                isNew ? "admingrid-sparkles-new" : "admingrid-sparkles"
+              }
+            />
+          </button>
+        )}
         {onAvailabilityChange && (
           <button
             type="button"

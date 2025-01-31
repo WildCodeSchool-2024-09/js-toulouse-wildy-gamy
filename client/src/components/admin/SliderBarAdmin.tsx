@@ -1,4 +1,4 @@
-import { Joystick, LogOut, Menu, Trophy, Users, X } from "lucide-react";
+import { Joystick, LogOut, Menu, Trophy, Users, View, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import "../../styles/admin/SliderBarAdmin.css";
 
@@ -32,6 +32,9 @@ function SliderBarAdmin({ isOpen, onToggle }: SliderBarAdminProps) {
   const handleLogout = () => {
     alert("logout");
   };
+  const handleClick = () => {
+    window.open("/", "_blank", "noopener,noreferrer");
+  };
 
   return (
     <div
@@ -48,7 +51,6 @@ function SliderBarAdmin({ isOpen, onToggle }: SliderBarAdminProps) {
           <Menu className="button-open" />
         )}
       </button>
-
       <div className="adminhome-menu">
         {menuItems.map((item) => (
           <Link key={item.id} to={item.link} className="menu-item">
@@ -61,6 +63,11 @@ function SliderBarAdmin({ isOpen, onToggle }: SliderBarAdminProps) {
           </Link>
         ))}
       </div>
+      <button type="button" className="vueUser-button" onClick={handleClick}>
+        <View className="iconItem" />
+        <span className="menu-item-text">Vue visiteur</span>
+      </button>
+
       <button type="button" onClick={handleLogout} className="logout-button">
         <LogOut className="iconItem" />
         <span

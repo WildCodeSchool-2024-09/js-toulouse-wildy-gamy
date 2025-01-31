@@ -14,6 +14,7 @@ const DEFAULT_GAME: Game = {
   image: "",
   price: 0,
   is_available: true,
+  is_new: false,
 };
 
 const AdminGames = () => {
@@ -22,6 +23,7 @@ const AdminGames = () => {
     loading,
     error,
     updateItem,
+    setData,
     deleteItem,
     addItem,
     updateAvailability,
@@ -65,6 +67,7 @@ const AdminGames = () => {
         image: gameData.image,
         price: Number(gameData.price),
         is_available: true,
+        is_new: selectedGame.is_new,
       };
 
       if (modalMode === "add") {
@@ -99,6 +102,35 @@ const AdminGames = () => {
     );
   }
 
+  const handleNew = async (id: number) => {
+    try {
+      const game = games?.find((game) => game.id === id);
+      if (!game) return;
+
+      const API_URL = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${API_URL}/api/games/${id}/new`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isNew: !game.is_new }),
+        credentials: "include",
+      });
+
+      if (!response.ok)
+        throw new Error(`HTTP error! status: ${response.status}`);
+
+      const updatedGames = games?.map((g) =>
+        g.id === id ? { ...g, is_new: !g.is_new } : g,
+      );
+      if (updatedGames) {
+        setData(updatedGames);
+      }
+    } catch (error) {
+      console.error("Erreur lors de la modification du statut nouveau:", error);
+    }
+  };
+
   return (
     <AdminLayout
       showAddButton={true}
@@ -117,6 +149,8 @@ const AdminGames = () => {
             onAvailabilityChange={updateAvailability}
             onEdit={handleEditClick}
             onDelete={deleteItem}
+            onNew={handleNew}
+            isNew={game.is_new}
           />
         ))}
       </div>
