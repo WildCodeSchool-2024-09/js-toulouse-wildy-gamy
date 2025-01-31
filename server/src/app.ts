@@ -18,6 +18,7 @@ app.use(
     origin: process.env.CLIENT_URL || "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+    exposedHeaders: ["Set-Cookie"],
     credentials: true,
   }),
 );
@@ -108,6 +109,12 @@ app.use(
     next: express.NextFunction,
   ): void => {
     if (err.name === "UnauthorizedError" || err.name === "JsonWebTokenError") {
+      res.setHeader(
+        "Set-Cookie",
+        `authToken=; HttpOnly; Path=/; Max-Age=0; SameSite=Strict${
+          process.env.NODE_ENV === "production" ? "; Secure" : ""
+        }`,
+      );
       res.status(401).json({ error: "Accès non autorisé" });
     }
     next(err);

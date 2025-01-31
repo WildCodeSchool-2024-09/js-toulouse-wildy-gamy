@@ -2,8 +2,15 @@ import path from "node:path";
 import argon2 from "argon2";
 import type { RequestHandler } from "express";
 import type { UploadedFile } from "express-fileupload";
+import jwt from "jsonwebtoken";
 import cloudinary from "../../middleware/cloudinary";
 import userRepository from "./userRepository";
+
+type MyPayload = {
+  sub: string;
+  email: string;
+  username: string;
+};
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -14,13 +21,42 @@ const hashingOptions = {
 
 const browse: RequestHandler = async (req, res, next) => {
   try {
-    const users = await userRepository.readAll();
-    const usersWithoutPassword = users.map(
-      ({ password_hash, ...user }) => user,
+    const cookies = req.headers.cookie
+      ?.split(";")
+      .map((cookie) => cookie.trim())
+      .reduce((acc: { [key: string]: string }, current) => {
+        const [key, value] = current.split("=");
+        acc[key] = value;
+        return acc;
+      }, {});
+
+    const token = cookies?.authToken;
+
+    if (!token) {
+      res.status(401).json({ error: "Non authentifié" });
+      return;
+    }
+
+    const decoded = jwt.verify(
+      token,
+      process.env.APP_SECRET as string,
+    ) as MyPayload;
+    const user = await userRepository.readById(
+      Number.parseInt(decoded.sub, 10),
     );
 
-    res.json(usersWithoutPassword);
+    if (!user) {
+      res.status(401).json({ error: "Utilisateur non trouvé" });
+      return;
+    }
+
+    const { password_hash, ...userWithoutPassword } = user;
+    res.json(userWithoutPassword);
   } catch (err) {
+    if (err instanceof jwt.JsonWebTokenError) {
+      res.status(401).json({ error: "Token invalide" });
+      return;
+    }
     next(err);
   }
 };
@@ -30,14 +66,14 @@ const read: RequestHandler = async (req, res, next) => {
     const { id } = req.params;
 
     if (!id) {
-      res.status(400).json({ error: "User ID is required" });
+      res.status(400).json({ error: "l'ID de l'utilisateur est requis" });
       return;
     }
 
     const user = await userRepository.readById(Number(id));
 
     if (!user) {
-      res.status(404).json({ error: "User not found" });
+      res.status(404).json({ error: "Utilisateur non trouvé" });
       return;
     }
 
@@ -146,7 +182,6 @@ const edit: RequestHandler = async (req, res, next) => {
     const { id } = req.params;
     const updates = req.body;
 
-    // Add profile_pic to allowed updates
     const allowedUpdates = [
       "name",
       "firstname",
@@ -156,7 +191,6 @@ const edit: RequestHandler = async (req, res, next) => {
       "profile_pic",
     ];
 
-    // Handle file upload if present
     if (req.files && "profile_pic" in req.files) {
       const profilePic = req.files.profile_pic as UploadedFile;
       const result = await cloudinary.uploader.upload(profilePic.tempFilePath, {
@@ -172,13 +206,13 @@ const edit: RequestHandler = async (req, res, next) => {
     const success = await userRepository.update(Number(id), filteredUpdates);
 
     if (!success) {
-      res.status(404).json({ error: "User not found" });
+      res.status(404).json({ error: "L'Utilisateur non trouvé" });
       return;
     }
 
     const updatedUser = await userRepository.readById(Number(id));
     if (!updatedUser) {
-      res.status(404).json({ error: "User not found" });
+      res.status(404).json({ error: "l'Utilisateur non trouvé" });
       return;
     }
     const { password_hash, ...userWithoutPassword } = updatedUser;

@@ -1,13 +1,11 @@
 import argon2 from "argon2";
-
 import type { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
-
 import userRepository from "../user/userRepository";
 
 const login: RequestHandler = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, stayConnected } = req.body;
 
     if (!email?.trim() || !password) {
       res.status(400).json({ error: "Email et mot de passe requis" });
@@ -40,14 +38,21 @@ const login: RequestHandler = async (req, res, next) => {
       },
       process.env.APP_SECRET as string,
       {
-        expiresIn: "1h",
+        expiresIn: stayConnected ? "30d" : "24h",
       },
     );
 
-    res.json({
-      token,
-      user: userWithoutPassword,
-    });
+    const maxAge = stayConnected
+      ? 30 * 24 * 60 * 60 * 1000
+      : 24 * 60 * 60 * 1000;
+    res.setHeader(
+      "Set-Cookie",
+      `authToken=${token}; HttpOnly; Path=/; Max-Age=${maxAge}; SameSite=Strict${
+        process.env.NODE_ENV === "production" ? "; Secure" : ""
+      }`,
+    );
+
+    res.json({ user: userWithoutPassword });
   } catch (err) {
     next(err);
   }
@@ -55,16 +60,19 @@ const login: RequestHandler = async (req, res, next) => {
 
 const verifyToken: RequestHandler = (req, res, next) => {
   try {
-    const authHeader = req.get("Authorization");
+    const cookies = req.headers.cookie
+      ?.split(";")
+      .map((cookie) => cookie.trim())
+      .reduce((acc: { [key: string]: string }, current) => {
+        const [key, value] = current.split("=");
+        acc[key] = value;
+        return acc;
+      }, {});
 
-    if (!authHeader) {
-      throw new Error("Authorization header manquant");
-    }
+    const token = cookies?.authToken;
 
-    const [type, token] = authHeader.split(" ");
-
-    if (type !== "Bearer") {
-      throw new Error("Type d'autorisation invalide");
+    if (!token) {
+      throw new Error("Token non trouvé");
     }
 
     const decoded = jwt.verify(
@@ -73,10 +81,14 @@ const verifyToken: RequestHandler = (req, res, next) => {
     ) as MyPayload;
 
     req.auth = decoded;
-
     next();
   } catch (err) {
-    console.error("Erreur d'authentification:", err);
+    res.setHeader(
+      "Set-Cookie",
+      `authToken=; HttpOnly; Path=/; Max-Age=0; SameSite=Strict${
+        process.env.NODE_ENV === "production" ? "; Secure" : ""
+      }`,
+    );
     res.status(401).json({ error: "Non autorisé" });
   }
 };

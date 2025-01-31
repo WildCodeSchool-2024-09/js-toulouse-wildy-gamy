@@ -8,14 +8,15 @@ import "../styles/LoginForm.css";
 interface LoginFormData {
   email: string;
   password: string;
-  stay_connected: boolean;
+  stayConnected: boolean;
+  [key: string]: string | boolean;
 }
 
 export default function LoginForm() {
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: "",
-    stay_connected: false,
+    stayConnected: false,
   });
 
   const [error, setError] = useState<string>("");
@@ -43,10 +44,7 @@ export default function LoginForm() {
         return;
       }
 
-      const response = await api.post("/api/login", {
-        email: formData.email,
-        password: formData.password,
-      });
+      const response = await api.post("/api/login", formData);
 
       if (!response) {
         throw new Error("Erreur de connexion");
@@ -54,7 +52,10 @@ export default function LoginForm() {
 
       if (response.status === 200) {
         const data = await response.json();
-        setAuth(data);
+        setAuth({
+          user: data.user,
+          token: "",
+        });
         navigate("/user_profile");
       }
     } catch (err) {
@@ -122,9 +123,9 @@ export default function LoginForm() {
               <input
                 type="checkbox"
                 className="login__remember-input"
-                id="stay_connected"
-                name="stay_connected"
-                checked={formData.stay_connected}
+                id="stayConnected"
+                name="stayConnected"
+                checked={formData.stayConnected}
                 onChange={handleInputChange}
                 disabled={isLoading}
               />

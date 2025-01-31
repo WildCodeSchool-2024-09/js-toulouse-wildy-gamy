@@ -1,6 +1,8 @@
 import "../styles/UserSettingsModal.css";
 import { KeyRound, LogOut, Pencil, Save, UserX, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../services/authContext";
 import type { User } from "../services/types";
 
 interface UserSettingsModalProps {
@@ -16,6 +18,8 @@ export default function UserSettingsModal({
   user,
   onUserUpdate,
 }: UserSettingsModalProps) {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [editModes, setEditModes] = useState({
     name: false,
     firstname: false,
@@ -75,6 +79,12 @@ export default function UserSettingsModal({
     } catch (error) {
       console.error("Error updating user:", error);
     }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    onClose();
+    navigate("/login");
   };
 
   if (!isOpen || !user) return null;
@@ -305,7 +315,11 @@ export default function UserSettingsModal({
             <UserX size={16} />
             Supprimer mon compte
           </button>
-          <button type="button" className="user-modal-action-button logout">
+          <button
+            type="button"
+            className="user-modal-action-button logout"
+            onClick={handleLogout}
+          >
             <LogOut size={16} />
             Me déconnecter
           </button>

@@ -4,42 +4,21 @@ interface RequestOptions {
   method?: string;
   headers?: HeadersInit;
   body?: BodyInit | Record<string, unknown> | null | undefined;
-  token?: string;
+  credentials?: RequestCredentials;
   [key: string]: unknown;
-}
-
-function getAuthToken(): string | null {
-  const cookies = document.cookie.split(";");
-  const tokenCookie = cookies.find((cookie) =>
-    cookie.trim().startsWith("authToken="),
-  );
-  return tokenCookie ? decodeURIComponent(tokenCookie.split("=")[1]) : null;
-}
-
-function setAuthToken(token: string, remember = false): void {
-  const expires = remember
-    ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
-    : undefined;
-
-  document.cookie = `authToken=${encodeURIComponent(token)}${expires ? `;expires=${expires.toUTCString()}` : ""};path=/;SameSite=Strict`;
-}
-
-function removeAuthToken(): void {
-  document.cookie = "authToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
 }
 
 export async function apiRequest(
   endpoint: string,
   options: RequestOptions = {},
 ) {
-  const token = options.token || getAuthToken();
-
   const config: RequestInit = {
     ...options,
     headers: {
       "Content-Type": "application/json",
       ...options.headers,
     },
+    credentials: "include",
     body:
       options.body instanceof FormData
         ? options.body
@@ -47,13 +26,6 @@ export async function apiRequest(
           ? JSON.stringify(options.body)
           : undefined,
   };
-
-  if (token) {
-    config.headers = {
-      ...config.headers,
-      Authorization: `Bearer ${token}`,
-    };
-  }
 
   if (options.body) {
     if (options.body instanceof FormData) {
@@ -69,7 +41,6 @@ export async function apiRequest(
   const response = await fetch(`${API_URL}${endpoint}`, config);
 
   if (response.status === 401) {
-    removeAuthToken();
     window.location.href = "/login";
     return null;
   }
@@ -95,10 +66,13 @@ export const api = {
 
   delete: (endpoint: string, options?: RequestOptions) =>
     apiRequest(endpoint, { ...options, method: "DELETE" }),
-};
 
-export const auth = {
-  setToken: setAuthToken,
-  getToken: getAuthToken,
-  removeToken: removeAuthToken,
+  logout: async () => {
+    const response = await apiRequest("/api/logout", { method: "POST" });
+    if (response?.ok) {
+      document.cookie =
+        "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+    return response;
+  },
 };
