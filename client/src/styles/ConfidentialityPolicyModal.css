@@ -1,0 +1,116 @@
+/* Animations */
+@keyframes modalOverlayShow {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0); /* Effet de flou progressif */
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
+@keyframes modalContentShow {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-30px); /* Combine scale et translation */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.confidentiality-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(116, 93, 143, 0.938);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  isolation: isolate;
+  z-index: 1000;
+  animation: modalOverlayShow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+}
+
+.confidentiality-content {
+  width: 90%;
+  background: rgba(21, 20, 43, 0.95);
+  border-radius: 34px;
+  border: 1px solid rgba(195, 176, 234, 0.2);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: modalContentShow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 1001;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.confidentiality-content::-webkit-scrollbar {
+  display: none;
+}
+
+.confidentiality-close {
+  position: fixed;
+  top: 60px;
+  right: 100px;
+  cursor: pointer;
+  color: #c3b0ea;
+  z-index: 1002;
+}
+
+.confidentiality-close:hover {
+  filter: drop-shadow(0px 0px 7px #c3b0ea);
+  transform: scale(1.1);
+}
+.confidentiality-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.confidentiality-title {
+  font-family: var(--font-title);
+  color: #dad0ef;
+  font-size: 1.75rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.confidentiality-subtitle {
+  font-family: var(--font-title);
+  color: #dad0ef;
+  font-size: 1.25rem;
+  text-align: left;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  padding-top: 10px;
+}
+
+.confidentiality-body {
+  text-align: justify;
+  color: #c3b0ea;
+  padding: 0 20px;
+  font-size: .75rem;
+  line-height: 1.2;
+}
+
+.confidentiality-span {
+  font-weight: bold;
+}
+
+.confidentiality-list {
+  list-style-type: circle;
+  margin-left: 50px;
+  padding-left: 20px;
+}

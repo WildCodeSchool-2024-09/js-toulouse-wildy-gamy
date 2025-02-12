@@ -8,9 +8,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.1",
+    "lucide-react": "^0.471.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.2"
+    "react-native-use-modal": "^1.0.2",
+    "react-router-dom": "^6.28.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.10",

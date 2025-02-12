@@ -1,100 +1,78 @@
+import fs from "node:fs";
+import path from "node:path";
+import cors from "cors";
 // Load the express module to create a web application
-
 import express from "express";
+import type { ErrorRequestHandler } from "express";
+import fileUpload from "express-fileupload";
 
 const app = express();
 
-// Configure it
-
 /* ************************************************************************* */
 
-// CORS Handling: Why is the current code present and do I need to define specific allowed origins for my project?
-
-// CORS (Cross-Origin Resource Sharing) is a security mechanism in web browsers that blocks requests from a different domain than the server.
-// You may find the following magic line in forums:
-
-// app.use(cors());
-
-// You should NOT do that: such code uses the `cors` module to allow all origins, which can pose security issues.
-// For this pedagogical template, the CORS code allows CLIENT_URL in development mode (when process.env.CLIENT_URL is defined).
-
-import cors from "cors";
-
-if (process.env.CLIENT_URL != null) {
-  app.use(cors({ origin: [process.env.CLIENT_URL] }));
-}
-
-// If you need to allow extra origins, you can add something like this:
-
-/*
+// CORS Configuration
+// CORS (Cross-Origin Resource Sharing) is a security mechanism in web browsers
+// that blocks requests from a different domain than the server.
 app.use(
   cors({
-    origin: ["http://mysite.com", "http://another-domain.com"],
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+    credentials: true,
   }),
 );
-*/
-
-// With ["http://mysite.com", "http://another-domain.com"]
-// to be replaced with an array of your trusted origins
 
 /* ************************************************************************* */
 
-// Request Parsing: Understanding the purpose of this part
-
-// Request parsing is necessary to extract data sent by the client in an HTTP request.
-// For example to access the body of a POST request.
-// The current code contains different parsing options as comments to demonstrate different ways of extracting data.
-
-// 1. `express.json()`: Parses requests with JSON data.
-// 2. `express.urlencoded()`: Parses requests with URL-encoded data.
-// 3. `express.text()`: Parses requests with raw text data.
-// 4. `express.raw()`: Parses requests with raw binary data.
-
-// Uncomment one or more of these options depending on the format of the data sent by your client:
-
-// app.use(express.json());
-// app.use(express.urlencoded());
-// app.use(express.text());
-// app.use(express.raw());
+// Request Parsing Configuration
+// These middlewares are necessary to extract data sent by the client in HTTP requests
+app.use(express.json()); // Pour les requêtes avec JSON data
+app.use(express.urlencoded({ extended: true })); // Pour les requêtes avec URL-encoded data
 
 /* ************************************************************************* */
 
-// Import the API router
+// File Upload Configuration
+app.use(
+  fileUpload({
+    createParentPath: true,
+    limits: {
+      fileSize: 5 * 1024 * 1024, // 5MB limite
+    },
+    abortOnLimit: true,
+    debug: true,
+    parseNested: true,
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  }),
+);
+
+/* ************************************************************************* */
+
+// Middleware pour vérifier si une clé APP_SECRET est définie
+if (!process.env.APP_SECRET) {
+  console.error("ERROR: APP_SECRET is not defined in environment variables");
+  process.exit(1);
+}
+
+// Import and use the API router
 import router from "./router";
-
-// Mount the API router under the "/api" endpoint
 app.use(router);
 
 /* ************************************************************************* */
 
-// Production-ready setup: What is it for?
-
-// The code includes sections to set up a production environment where the client and server are executed from the same processus.
-
-// What it's for:
-// - Serving client static files from the server, which is useful when building a single-page application with React.
-// - Redirecting unhandled requests (e.g., all requests not matching a defined API route) to the client's index.html. This allows the client to handle client-side routing.
-
-import fs from "node:fs";
-import path from "node:path";
+// Production Setup - Static Files and Client-Side Routing
 
 // Serve server resources
-
 const publicFolderPath = path.join(__dirname, "../../server/public");
-
 if (fs.existsSync(publicFolderPath)) {
   app.use(express.static(publicFolderPath));
 }
 
 // Serve client resources
-
 const clientBuildPath = path.join(__dirname, "../../client/dist");
-
 if (fs.existsSync(clientBuildPath)) {
   app.use(express.static(clientBuildPath));
-
   // Redirect unhandled requests to the client index file
-
   app.get("*", (_, res) => {
     res.sendFile("index.html", { root: clientBuildPath });
   });
@@ -102,23 +80,44 @@ if (fs.existsSync(clientBuildPath)) {
 
 /* ************************************************************************* */
 
-// Middleware for Error Logging
-// Important: Error-handling middleware should be defined last, after other app.use() and routes calls.
+// Error Handling Middlewares
 
-import type { ErrorRequestHandler } from "express";
-
-// Define a middleware function to log errors
+// Logging Middleware
 const logErrors: ErrorRequestHandler = (err, req, res, next) => {
-  // Log the error to the console for debugging purposes
-  console.error(err);
-  console.error("on req:", req.method, req.path);
-
-  // Pass the error to the next middleware in the stack
+  console.error("Erreur détaillée:", {
+    message: err.message,
+    stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
+    path: req.path,
+    method: req.method,
+  });
   next(err);
 };
 
-// Mount the logErrors middleware globally
 app.use(logErrors);
+
+// Authentication Error Handling
+interface AuthError extends Error {
+  name: string;
+}
+
+app.use(
+  (
+    err: AuthError,
+    _req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ): void => {
+    if (err.name === "UnauthorizedError" || err.name === "JsonWebTokenError") {
+      res.status(401).json({ error: "Accès non autorisé" });
+    }
+    next(err);
+  },
+);
+
+// 404 Handler for API routes
+app.use("/api/*", (req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
 /* ************************************************************************* */
 

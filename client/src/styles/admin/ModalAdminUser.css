@@ -1,0 +1,141 @@
+.modal-admin-user.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(27, 20, 43, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-admin-user .modal-container {
+  width: 90%;
+  max-width: 1000px;
+  background: rgba(21, 20, 43, 0.95);
+  border-radius: 34px;
+
+  border: 1px solid rgba(195, 176, 234, 0.2);
+}
+
+.modal-admin-user .edit-modal-title {
+  font-family: var(--font-title-phosphate);
+  color: var(--font-title-color);
+  font-size: 1.75rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #c3b0ea;
+}
+
+.modal-admin-user .edit-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.modal-admin-user .profile-section {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.modal-admin-user .current-profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  border: 2px solid rgba(195, 176, 234, 0.3);
+}
+
+.modal-admin-user .current-profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-admin-user .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.modal-admin-user .form-group {
+  margin-bottom: 8px;
+}
+
+.modal-admin-user .edit-modal-label {
+  font-size: 14px;
+  color: #c3b0ea;
+  display: block;
+}
+
+.modal-admin-user .edit-modal-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 30px;
+  background: rgba(34, 24, 52, 0.4);
+  color: #c3b0ea;
+  border: 1px solid rgba(195, 176, 234, 0.2);
+  font-size: 14px;
+}
+
+.modal-admin-user .edit-modal-input:focus {
+  outline: none;
+  border-color: rgba(195, 176, 234, 0.4);
+}
+
+.modal-admin-user .admin-toggle {
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+  padding-top: 8px;
+}
+
+.modal-admin-user .edit-modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.modal-admin-user .edit-modal-save {
+  padding: 12px 40px;
+  border-radius: 30px;
+  background: #6403a9;
+  color: #ffffff;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal-admin-user .edit-modal-cancel {
+  padding: 12px 40px;
+  border-radius: 30px;
+  background: rgba(34, 24, 52, 0.4);
+  color: #c3b0ea;
+  font-size: 14px;
+  border: 1px solid rgba(195, 176, 234, 0.2);
+  cursor: pointer;
+}
+
+.modal-admin-user .required {
+  color: #fe00ea;
+  margin-left: 2px;
+}
+
+.modal-admin-user .error-message {
+  color: #fe00ea;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.admin-toggle-button {
+  all: unset;
+  cursor: pointer;
+}

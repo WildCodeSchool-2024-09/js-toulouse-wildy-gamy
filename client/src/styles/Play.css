@@ -1,0 +1,20 @@
+.play-page-container {
+  padding-bottom: 120px;
+}
+
+.play-wg-logo {
+  width: 20%;
+  position: relative;
+  padding: 20px 0 0 20px;
+}
+
+.play-page-title {
+  font-family: var(--font-title-phosphate);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--font-title-color);
+  font-size: 8vw;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(195, 176, 234, 0.5), 0 0 20px
+    rgba(195, 176, 234, 0.3), 0 0 30px rgba(195, 176, 234, 0.1);
+}

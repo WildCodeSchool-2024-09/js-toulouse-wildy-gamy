@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+.ranking-logo {
+  width: 17%;
+  position: relative;
+}
+
+.ranking-page {
+  padding: 20px 20px 100px 20px;
+}
+
+.ranking-title {
+  font-size: 8vw;
+  color: #c3b0ea;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: var(--font-title-phosphate);
+  text-shadow: 0 0 10px rgba(195, 176, 234, 0.5), 0 0 20px
+    rgba(195, 176, 234, 0.3), 0 0 30px rgba(195, 176, 234, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.ranking-bigcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ranking-container {
+  position: relative;
+  padding: 10px;
+  border: #694fa6 3px solid;
+  border-radius: 35px;
+  background: linear-gradient(0deg, #5b4391, #1b142b);
+  color: #c3b0ea;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #c3b0ea;
+  background-color: rgba(195, 176, 234, 0.05);
+  transition: background-color 0.2s ease;
+  width: 100%;
+  gap: 5px;
+}
+
+.ranking-number {
+  color: #c3b0ea;
+  font-weight: 600;
+}
+
+.ranking-item-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ranking-item:hover {
+  background-color: rgba(195, 176, 234, 0.1);
+}
+
+.ranking-profilepic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 5px 0 5px 5px;
+}
+
+.ranking-users {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  padding: 0 20px;
+}
+
+.ranking-usersname {
+  color: #c3b0ea;
+  font-weight: 600;
+}
+
+.ranking-imagescore {
+  color: rgb(255, 255, 255);
+  filter: drop-shadow(0 0 1px yellow);
+}
+
+.ranking-totalpoints {
+  color: #c3b0ea;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ranking-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ranking-userspoints {
+  color: #c3b0ea;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+  padding: 0 10px 0 0;
+  gap: 5px;
+}
+
+.nav-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(29, 23, 41, 0.95);
+  border-top: 1px solid #c3b0ea;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-button {
+  color: #c3b0ea;
+  background: none;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+/*PROFILE HEADER*/
+
+.ranking-header {
+  position: relative;
+  padding: 2px;
+  border: #694fa6 3px solid;
+  border-radius: 50px;
+  background: linear-gradient(0deg, #5b4391, #1b142b);
+  gap: 12px;
+  color: #c3b0ea;
+  box-shadow: 0 0 20px rgba(100, 3, 169, 0.3);
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.ranking-userpic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 3px #ffff);
+  background: linear-gradient(#3a2e53, #3a2e53);
+}
+
+.ranking-profileheader {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  padding: 10px;
+}
+
+.ranking-userinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ranking-userstats {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.ranking-userpoints {
+  color: #c3b0ea;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.ranking-image {
+  color: rgb(255, 255, 255);
+  filter: drop-shadow(0 0 1px yellow);
+  width: 20px;
+  height: 20px;
+}
+
+.ranking-userinfo {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  padding: 5px;
+}
+
+.ranking-username {
+  color: #c3b0ea;
+  font-weight: 600;
+  font-size: clamp(16px, 5vw, 24px);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ranking-item-neon {
+  filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 3px #ffff);
+  background: linear-gradient(#3a2e53, #3a2e53);
+}
+
+.ranking-text-neon {
+  color: rgb(255, 255, 255) !important;
+  text-shadow: 0 0 5px #c3b0ea, 0 0 10px #c3b0ea;
+}
+
+.ranking-item-neon .ranking-usersname {
+  color: white;
+  text-shadow: 0 0 5px #c3b0ea, 0 0 10px #c3b0ea;
+}
+
+.ranking-item-neon .ranking-totalpoints {
+  color: white;
+  text-shadow: 0 0 5px #c3b0ea, 0 0 10px #c3b0ea;
+}

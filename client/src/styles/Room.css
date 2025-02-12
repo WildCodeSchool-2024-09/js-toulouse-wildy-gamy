@@ -1,0 +1,444 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+.room-logo {
+  width: 20%;
+  position: relative;
+  padding: 20px 0 0 20px;
+}
+
+.room-page {
+  padding-bottom: 100px;
+}
+
+.room-title {
+  font-size: 8vw;
+  color: #c3b0ea;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: var(--font-title-phosphate);
+  text-shadow: 0 0 10px rgba(195, 176, 234, 0.5), 0 0 20px
+    rgba(195, 176, 234, 0.3), 0 0 30px rgba(195, 176, 234, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+.room-container {
+  border-radius: 15px;
+  margin: 0 15px 25px 15px;
+  position: relative;
+  border: 3px solid #c3b0ea;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 1;
+  height: 34rem;
+}
+
+.room-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  border-radius: 15px 15px 0 0;
+}
+
+.room-bigcontainer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(100, 3, 169, 1),
+    rgba(100, 3, 169, 1),
+    rgba(100, 3, 169, 1),
+    rgba(100, 3, 169, 1),
+    rgba(100, 3, 169, 1),
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 0 0 15px 15px;
+}
+
+.room-text {
+  font-family: "Inter", sans-serif;
+  font-size: 3.3vw;
+  text-align: start;
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.room-title-history {
+  font-size: 4vw;
+  padding-bottom: 8px;
+}
+
+.room-adress {
+  padding: 10px 0 10px 0;
+  font-size: 3.6vw;
+}
+
+.room-timetable {
+  font-size: 3.6vw;
+}
+
+/*CARROUSEL*/
+
+.room-titlecarousel {
+  font-size: 1.8rem;
+  color: #c3b0ea;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: var(--font-title-phosphate);
+  text-shadow: 0 0 10px rgba(195, 176, 234, 0.5), 0 0 20px
+    rgba(195, 176, 234, 0.3), 0 0 30px rgba(195, 176, 234, 0.1);
+  margin-left: 15px;
+}
+
+.room-carousel {
+  background-color: transparent;
+  margin-bottom: 25px;
+}
+
+.room-carouselcontainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 35px;
+}
+
+.room-gamecard {
+  position: relative;
+}
+
+.room-gameimagecontainer {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  border: #c3b0ea 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.room-gameimage {
+  width: 100%;
+  padding: 15px;
+}
+
+.img.room-gameimage {
+  width: 80%;
+}
+
+.room-gametitle {
+  color: #c3b0ea;
+  font-family: "Inter", sans-serif;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.room-carouselcontainer::-webkit-scrollbar {
+  display: none;
+}
+
+.room-carouselcontainer {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.room-arrowimage {
+  cursor: pointer;
+  height: 100%;
+  width: 110%;
+  padding-right: 15px;
+}
+
+.room-titlecontainercarousel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*JEUX EN LIGNE*/
+.room-arrow-gameonline {
+  height: 100%;
+  width: 14%;
+  z-index: 12;
+}
+
+.room-arrow-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.room-gameonline {
+  font-family: "Inter", sans-serif;
+  margin: 15px;
+  position: relative;
+  border: 3px solid #c3b0ea;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 10rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #dd57d2;
+}
+
+.room-gameonline:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(221, 87, 210, 0.3);
+}
+
+.room-image-gameonline {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  border-radius: 15px 0 0 15px;
+}
+
+.room-gameonlinebigcontainer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+
+.room-gameonlinecontainer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(
+    to left,
+    rgba(221, 87, 210, 1),
+    rgba(221, 87, 210, 1),
+    rgba(221, 87, 210, 1),
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0)
+  );
+  z-index: 2;
+}
+
+.room-gameonlinecontent {
+  width: 50%;
+  margin-left: 42%;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.room-titlegameonline {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  margin-bottom: 0.5rem;
+  color: #000;
+  font-weight: 400;
+  font-family: var(--font-title-phosphate);
+  text-shadow: 0 0 10px rgba(195, 176, 234, 0.5), 0 0 20px
+    rgba(195, 176, 234, 0.3), 0 0 30px rgba(195, 176, 234, 0.1);
+  line-height: 0.9;
+  position: relative;
+  z-index: 10;
+}
+
+.room-textgameonline {
+  font-size: 0.8rem;
+  line-height: 1.2;
+  color: #000;
+  position: relative;
+  z-index: 10;
+}
+.room-textgameonline strong {
+  display: block;
+}
+
+/*FORMULAIRE*/
+
+.form-title {
+  font-size: 1.8rem;
+  color: #c3b0ea;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: var(--font-title-phosphate);
+  text-shadow: 0 0 10px rgba(195, 176, 234, 0.5), 0 0 20px
+    rgba(195, 176, 234, 0.3), 0 0 30px rgba(195, 176, 234, 0.1);
+}
+
+.form-container {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.form-group label {
+  color: #c3b0ea;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 25px;
+  border: 1px solid #694fa6;
+  background-color: #221834;
+  color: #9b9b9b;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.form-button {
+  width: 80%;
+  display: block;
+  margin: 20px auto;
+  background-color: #6403a9;
+  color: #c3b0ea;
+  font-size: 1rem;
+  padding: 12px 0;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 0 15px rgba(144, 1, 245, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.form-button:hover {
+  transform: scale(1.03);
+  background-color: #7504c4;
+  box-shadow: 0 0 20px rgba(144, 1, 245, 0.7);
+}
+
+.error {
+  color: #ff4646;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.contact-form-asterisk {
+  color: #fe00ea;
+  font-size: 16px;
+  font-weight: 200;
+}
+
+/* Version Desktop */
+@media (min-width: 768px) {
+  .room-logo {
+    width: 13%;
+    padding: 30px;
+  }
+
+  .room-page {
+    padding-bottom: 150px;
+  }
+
+  .room-title {
+    font-size: 3vw;
+    display: block;
+    align-items: flex-start;
+    padding-left: 25px;
+  }
+
+  .room-container {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .room-text {
+    padding: 20px;
+  }
+
+  .room-image {
+    height: 300px;
+    z-index: 1;
+  }
+
+  .room-titlecarousel {
+    font-size: 2.5rem;
+    margin-left: 30px;
+  }
+
+  .room-gameimagecontainer {
+    width: 250px;
+    height: 250px;
+  }
+
+  .room-gameimage {
+    width: 100%;
+  }
+
+  .room-gameonline {
+    flex-direction: row;
+    padding: 40px;
+    margin: 30px auto;
+    max-width: 70%;
+  }
+
+  .room-gameonline .room-textgameonline {
+    align-items: center;
+    text-align: left;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin: 0 auto;
+    padding: 40px;
+  }
+
+  .form-title {
+    font-size: 2.5rem;
+  }
+
+  .form-button {
+    width: 50%;
+  }
+}

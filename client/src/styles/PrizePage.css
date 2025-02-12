@@ -1,0 +1,250 @@
+body.modal-open .prize-card:hover .prize-card__description {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.modal-open .prize-card:hover {
+  transform: none;
+  border-color: transparent;
+  box-shadow: none;
+  cursor: default !important;
+}
+
+.prize-logo {
+  width: 17%;
+  position: relative;
+}
+
+.prizes-page__title {
+  font-family: var(--font-title-phosphate);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--font-title-color);
+  font-size: 8vw;
+  text-align: center;
+  padding-bottom: 10px;
+  text-shadow: 0 0 10px rgba(195, 176, 234, 0.5), 0 0 20px
+    rgba(195, 176, 234, 0.3), 0 0 30px rgba(195, 176, 234, 0.1);
+}
+
+.prize-page {
+  padding: 20px 20px 0px 20px;
+}
+
+.prizes-page__container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.prizes-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 35px 0px 150px 0px;
+}
+
+.prize-card {
+  position: relative;
+  aspect-ratio: 1;
+  background-color: #1d1729;
+  border-radius: 50%;
+  border: double 2px transparent;
+  background-image: linear-gradient(#1d1729, #1d1729),
+    linear-gradient(
+      to right,
+      rgba(172, 91, 245, 0.6),
+      rgba(255, 182, 255, 0.3) 70%,
+      rgba(255, 182, 255, 0.1)
+    );
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.prize-card:hover {
+  transform: scale(1.05);
+  border-color: rgba(142, 91, 245, 0.5);
+  box-shadow: 0 0 15px rgba(142, 91, 245, 0.3);
+  cursor: pointer !important;
+  box-shadow: 0 0 25px rgba(255, 60, 189, 0.3), inset 0 0 40px
+    rgba(139, 92, 246, 0.2);
+}
+
+.prize-card__content {
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+
+.prize-card__image-container {
+  width: 50%;
+  height: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.prize-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prize-card__title {
+  font-family: "Inter", sans-serif;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  margin-top: auto;
+  width: 100%;
+  letter-spacing: 0.2px;
+  position: absolute;
+  bottom: -27px;
+}
+
+.prize-card__points {
+  position: absolute;
+  bottom: 8px;
+  right: 5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+.prize-card__points-value {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: bold;
+  border-radius: 50%;
+  min-width: 1.8rem;
+  min-height: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  background-color: #1d1729;
+}
+
+.prize-coin {
+  width: 2rem;
+  height: 2rem;
+  margin-left: -36px;
+  margin-bottom: 2px;
+  z-index: 1;
+}
+
+.prize-card__description {
+  position: absolute;
+  inset: 0;
+  background: rgba(29, 23, 41, 0.95);
+  border-radius: 50%;
+  padding: 1rem;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.prize-card:hover .prize-card__description {
+  opacity: 1;
+}
+
+.prize-card__description p {
+  color: white;
+  font-size: 0.75rem;
+  text-align: center;
+  line-height: 1.4;
+  cursor: pointer !important;
+}
+
+@media (max-width: 768px) {
+  .prizes-page__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .prize-card__title {
+    font-size: 0.875rem;
+  }
+
+  .prize-card__points-value {
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .prizes-page__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+.prize-card--acquired {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.prize-card--acquired:hover {
+  transform: none;
+  border-color: transparent;
+  box-shadow: none;
+  cursor: not-allowed !important;
+}
+
+.prize-card__acquired-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(29, 23, 41, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.prize-card--view-only {
+  pointer-events: none;
+}
+
+.prize-card--view-only:hover {
+  transform: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.prize-card--view-only .prize-card__description {
+  display: none;
+}
+
+.prize-card--unaffordable {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.prize-card--unaffordable:hover {
+  transform: none;
+  border-color: transparent;
+  box-shadow: none;
+  cursor: not-allowed !important;
+}
+
+.prize-card__unaffordable-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(29, 23, 41, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}

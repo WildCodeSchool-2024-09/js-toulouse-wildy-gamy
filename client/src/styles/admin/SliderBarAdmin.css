@@ -1,0 +1,150 @@
+.adminhome-sidebar {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  height: 100vh;
+  background: linear-gradient(45deg, #9001f5, #c3b0ea);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.mail-icon-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.mail-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff4d9e;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.adminhome-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.adminhome-button {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: #9001f5;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.button-open,
+.button-close {
+  width: 35px;
+  height: 35px;
+  color: #e9d5ff;
+  filter: drop-shadow(0 4px 6px rgba(88, 28, 135, 0.5));
+}
+
+.adminhome-sidebar-open {
+  left: 0;
+  width: 250px;
+  justify-content: center;
+}
+
+.adminhome-sidebar-close {
+  left: -100%;
+  width: 80px;
+}
+
+.menu-item {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.menu-item img {
+  width: 30px;
+  height: 30px;
+}
+
+.menu-item-text {
+  font-size: 20px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  text-decoration: none;
+  color: #f3f4f6;
+}
+
+.logout-button,
+.vueUser-button {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: none;
+  border: none;
+  color: #f3f4f6;
+  cursor: pointer;
+  font-size: 1.5rem;
+  width: 100%;
+  margin-top: auto;
+}
+
+.logout-button img {
+  width: 30px;
+  height: 30px;
+}
+
+.logout-button span,
+.vueUser-button span {
+  margin-left: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.menu-item-text-hidden {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.main-content.main-content-shifted {
+  margin-left: 250px;
+}
+
+.iconItem {
+  width: 30px;
+  height: 30px;
+  color: #e9d5ff;
+  filter: drop-shadow(0 4px 6px rgba(88, 28, 135, 0.5));
+  position: relative;
+}
+
+.mailicon-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}

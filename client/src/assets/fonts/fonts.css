@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "PhosphateInline";
+  src: url("./phosphateinline-webfont.woff2") format("woff2"),
+    url("./phosphateinline-webfont.woff") format("woff");
+  font-weight: 400; /* Ajout du font-weight par défaut */
+  font-style: normal;
+}

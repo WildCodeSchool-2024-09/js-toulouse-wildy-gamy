@@ -1,0 +1,237 @@
+.mobile-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 80px;
+  background: linear-gradient(135deg, #694fa6, #281e40, #281e40, #694fa6);
+  border-radius: 50px;
+  border: 2px solid #c3b0ea;
+  position: fixed;
+  bottom: 10px;
+  width: calc(100% - 2rem);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  z-index: 1000;
+  box-shadow: 0px 0px 15px #c3b0ea;
+}
+
+.nav-bar-separator {
+  width: 1.5px;
+  height: 50px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #c3b0ea,
+    #c3b0ea,
+    transparent
+  );
+  margin: 0 15px;
+}
+
+.nav-profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.nav-bar-link {
+  color: #c3b0ea;
+  text-decoration: none;
+  height: 35px;
+}
+
+.burger-menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  width: 35px;
+  height: 24px;
+}
+
+.burger-bar {
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.burger-menu-dropdown {
+  position: absolute;
+  top: -260%;
+  width: calc(75% - 2rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(40, 30, 64, 0.95);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  z-index: 2000;
+  opacity: 0;
+  transform-origin: bottom;
+  transform: translateX(-50%) scaleY(0);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.burger-menu-dropdown.active {
+  opacity: 1;
+  transform: translateX(-50%) scaleY(1);
+  pointer-events: auto;
+}
+
+.burger-menu-link {
+  color: #c3b0ea;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.burger-menu-link:hover {
+  color: #ffffff;
+}
+
+.burger-menu-button.open .burger-bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.burger-menu-button.open .burger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu-button.open .burger-bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.burger-bar {
+  width: 100%;
+  height: 3px;
+  background-color: #c3b0ea;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+  box-shadow: 0px 0px 15px #feec5c;
+}
+
+.burger-menu-button-text {
+  all: unset;
+  cursor: pointer;
+  color: #c3b0ea;
+  font: inherit;
+  line-height: 1;
+}
+
+.nav-bar-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-bar-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 20%;
+}
+
+.nav-bar-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 20%;
+}
+
+.login-icon,
+.home-icon {
+  width: 35px;
+  height: 35px;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+}
+
+.desktop-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    #0a0a13 0%,
+    #0a0a13 60%,
+    rgba(10, 10, 19, 0.95) 75%,
+    rgba(10, 10, 19, 0.85) 85%,
+    rgba(10, 10, 19, 0.6) 92%,
+    rgba(10, 10, 19, 0.2) 96%,
+    transparent 100%
+  );
+  z-index: 1000;
+}
+
+.desktop-nav-container {
+  display: flex;
+  align-items: center;
+  padding: 60px;
+  justify-content: space-between;
+  height: 140px;
+}
+
+.desktop-nav-links {
+  display: flex;
+  gap: min(25px, 30px);
+}
+
+.desktop-nav-link {
+  color: #c3b0ea;
+  text-decoration: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+}
+.desktop-nav-link:hover {
+  filter: drop-shadow(0px 0px 7px #c3b0ea);
+  transform: scale(1.1);
+}
+
+.desktop-nav-icon {
+  width: 80%;
+}
+
+.desktop-nav-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#desktop-nav-text {
+  font-size: 1.2vw;
+  white-space: nowrap;
+}
+
+.desktop-nav-logo {
+  width: 10%;
+}
+
+.desktop-nav-logo-container {
+  padding: 30px 0 0 30px;
+}

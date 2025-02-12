@@ -1,0 +1,18 @@
+.add-button {
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #9001f5, #c3b0ea);
+  color: #e9d5ff;
+  filter: drop-shadow(0 4px 6px rgba(88, 28, 135, 0.5));
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  z-index: 1050;
+}

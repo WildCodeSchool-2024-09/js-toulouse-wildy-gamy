@@ -1,0 +1,172 @@
+.user-profile-page-container {
+  margin-bottom: 100px;
+  padding: 20px;
+}
+
+.play-wg-logo-user-page {
+  width: 20%;
+  position: relative;
+}
+
+.user-profile-info-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border: #694fa6 3px solid;
+  border-radius: 20px;
+  background: linear-gradient(0deg, #5b4391, #1b142b);
+  gap: 12px;
+}
+
+.user-profile-page-settings-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.user-profile-page-title {
+  font-family: var(--font-title-phosphate);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--font-title-color);
+  font-size: 8vw;
+  text-align: center;
+  padding: 12px;
+  text-shadow: 0 0 10px rgba(195, 176, 234, 0.5), 0 0 20px
+    rgba(195, 176, 234, 0.3), 0 0 30px rgba(195, 176, 234, 0.1);
+}
+
+.h2-welcome-message {
+  text-align: center;
+}
+.user-profile-stats-bar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.user-profile-stats-total-points,
+.user-profile-stats-rank,
+.user-profile-stats-actual-points {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-profile-medal-icon,
+.user-profile-gift-icon {
+  width: 50px;
+}
+
+.user-profile-total-points-icon,
+.user-profile-trophy-icon,
+.user-profile-actual-points-icon {
+  color: rgb(255, 255, 255);
+  filter: drop-shadow(0 0 1px yellow);
+}
+
+.user-profile-button-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.user-profile-ranking-button,
+.user-profile-exchange-button {
+  width: 130px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #6403a9;
+  color: var(--font-title-color);
+  padding: 8px 8px;
+  border-radius: 50px;
+  border: white 2px solid;
+  cursor: pointer;
+  overflow-wrap: normal;
+  box-shadow: yellow 0px 0px 10px;
+}
+
+.user-profile-ranking-button:hover,
+.user-profile-exchange-button:hover {
+  background-color: var(--font-title-color);
+  color: #6403a9;
+}
+
+.user-profile-page-favorites-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.user-profile-page-prizes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.user-profile-page-no-prizes-message,
+.user-profile-page-no-favorites-message {
+  color: var(--font-title-color);
+  text-align: center;
+}
+
+.user-profile-avatar-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.user-profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: block;
+  border: white 2px solid;
+  box-shadow: yellow 0px 0px 10px;
+}
+
+.upload-icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 24px;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  border: 1px solid #9001f5;
+}
+
+.upload-icon:hover {
+  background: #694fa6;
+}
+
+.upload-status {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #fff;
+}
+
+.upload-error {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ff4444;
+  font-size: 12px;
+  white-space: nowrap;
+  text-align: center;
+}

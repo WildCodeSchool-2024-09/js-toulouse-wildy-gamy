@@ -1,0 +1,434 @@
+.admin-dashboard {
+  /* Grille spécifique à l'admin */
+  .admingrid-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    z-index: 1;
+  }
+
+  .mail-icon {
+    position: fixed;
+    top: 180px;
+    right: 75px;
+    z-index: 2;
+  }
+
+  .adminhome-sidebar {
+    z-index: 2;
+  }
+
+  .admingrid-card-user {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .adminCard-info {
+    display: flex;
+    flex-direction: row;
+    align-items: column;
+    gap: 10px;
+  }
+
+  .admingames-container,
+  .adminprizes-container,
+  .adminusers-container {
+    min-height: 100vh;
+    background-color: #0b0812;
+    position: relative;
+    padding-top: 120px;
+  }
+
+  .admingames-logo,
+  .adminprizes-logo,
+  .adminusers-logo {
+    width: 14%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px;
+  }
+
+  .admingames-content,
+  .adminprizes-content,
+  .adminusers-content {
+    padding: 2rem;
+    margin-top: 30px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding-bottom: calc(70px + 40px + 2rem);
+  }
+
+  .main-content {
+    transition: margin-left 0.3s ease;
+  }
+
+  .main-content-shifted {
+    margin-left: 240px;
+  }
+
+  /* Cards */
+  .admincard-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #9001f5, #c3b0ea);
+    position: relative;
+    min-height: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .admincard-content:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .admincard-content-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+  }
+
+  .admincard-content-info-user {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+  }
+
+  /* Images */
+  .gamecard-image {
+    width: 50%;
+    padding-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .pricecard-img {
+    width: 30%;
+    margin-bottom: 15px;
+  }
+
+  .adminCard-name {
+    font-size: 1.4vw;
+    color: #f3f4f6;
+    white-space: nowrap;
+    padding: 0 20px 0 20px;
+  }
+
+  /* prix */
+  .adminCard-prices {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .adminCard-points {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .adminCard-prices-game,
+  .adminCard-prices-prize,
+  .adminCard-points-user,
+  .adminCard-currentpoint-user {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: white;
+    padding: 6px 12px;
+    margin-bottom: 5px;
+    border-radius: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .adminCard-prices-game span,
+  .adminCard-prices-prize span,
+  .adminCard-points-user span,
+  .adminCard-currentpoint-user span {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #9001f5; /* Couleur assortie au thème */
+  }
+
+  .adminCard-prices-game svg,
+  .adminCard-prices-prize svg,
+  .adminCard-points-user svg,
+  .adminCard-currentpoint-user svg {
+    color: #9001f5; /* Couleur assortie au thème */
+  }
+
+  /* Boutons de la carte */
+  .admincard-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    margin-top: auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+
+  .admincard-buttons-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+
+  .MuiTypography-root {
+    color: #f3f4f6;
+  }
+
+  .admincard-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admincard-button:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .admincard-button:active {
+    transform: scale(0.95);
+  }
+
+  .admingrid-eye,
+  .admingrid-pencil,
+  .admingrid-trash,
+  .admingrid-ban,
+  .admingrid-sparkles {
+    width: 22px;
+    height: 22px;
+    color: #e9d5ff;
+    filter: drop-shadow(0 4px 6px rgba(88, 28, 135, 0.5));
+    transition: color 0.2s ease;
+  }
+
+  .admingrid-sparkles-new {
+    width: 22px;
+    height: 22px;
+    color: #db9e2b;
+    fill: #db9e2b;
+    filter: drop-shadow(0 0 10px #db9e2b);
+  }
+
+  .admingrid-eye:hover,
+  .admingrid-pencil:hover,
+  .admingrid-trash:hover,
+  .admingrid-ban:hover,
+  .admingrid-sparkles:hover {
+    color: #ff4d9e;
+  }
+
+  /* États des cartes */
+  .admincard-content.admincard-content-unavailable {
+    background: linear-gradient(45deg, #8f01f55d, #c3b0ea4b) !important;
+    order: 1;
+  }
+
+  .admincard-content.admincard-content-available {
+    order: 0;
+  }
+
+  .admincard-content.admincard-content-unavailable-user {
+    background: linear-gradient(45deg, #8f01f55d, #c3b0ea4b) !important;
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 20px;
+    min-height: 80px;
+  }
+
+  .admincard-content.admincard-content-available-user {
+    order: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px 20px;
+    min-height: 80px;
+  }
+
+  .admincard-content.admincard-content-available-user.is-admin {
+    background: linear-gradient(45deg, #ff4d9e, #c3b0ea);
+  }
+
+  /* Style spécifique pour les prix */
+  .prizecard-content {
+    background: linear-gradient(45deg, #9001f5, #c3b0ea);
+    min-height: 180px;
+    justify-content: center;
+  }
+
+  /* Modales admin */
+  .admin-modal-content {
+    padding: 20px;
+  }
+
+  .admin-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .admin-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .admin-form-label {
+    color: #f3f4f6;
+    font-weight: 500;
+  }
+
+  .admin-form-input {
+    padding: 8px 12px;
+    border: 1px solid #4a4a4a;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+    color: #f3f4f6;
+  }
+
+  /* Boutons de modale */
+  .admin-modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .admin-modal-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .admin-modal-button-save {
+    background: linear-gradient(45deg, #9001f5, #c3b0ea);
+    color: white;
+  }
+
+  .admin-modal-button-cancel {
+    background-color: #6b7280;
+    color: white;
+  }
+
+  .admin-modal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+/* Pages de chargement et d'erreur */
+.admin-loading-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #0b0812;
+}
+
+.admin-loading-message,
+.admin-error-message {
+  font-size: 1.5rem;
+  color: #9001f5;
+  text-align: center;
+  padding: 2rem;
+}
+
+.profile_pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.adminCard-user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #f3f4f6;
+  white-space: nowrap;
+}
+
+.adminCard-phone,
+.adminCard-username {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.username-icon,
+.phone-icon {
+  color: #e9d5ff;
+  filter: drop-shadow(0 4px 6px rgba(88, 28, 135, 0.5));
+}
+
+.admingrid-ban {
+  width: 22px;
+  height: 22px;
+  color: #e9d5ff;
+  filter: drop-shadow(0 4px 6px rgba(88, 28, 135, 0.5));
+  transition: color 0.2s ease;
+}
+
+.admingrid-ban.banned {
+  color: #666;
+  transform: rotate(45deg);
+}
+
+.admingrid-ban:hover {
+  color: #ff4d9e;
+}
+
+.admingrid-ban.banned:hover {
+  transform: rotate(0deg);
+  color: #4caf50;
+}
+
+.admin-switch {
+  & .MuiSwitch-switchBase.Mui-checked {
+    color: #ff4d9e;
+
+    &:hover {
+      background-color: rgba(255, 105, 180, 0.068);
+    }
+
+    & + .MuiSwitch-track {
+      background-color: #ff4d9e;
+    }
+  }
+}

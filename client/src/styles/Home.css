@@ -1,0 +1,233 @@
+.home-container {
+  padding: 1rem;
+  padding-bottom: 100px;
+}
+
+.home-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-logo {
+  width: 40%;
+}
+
+.home-welcome-text {
+  text-align: center;
+  color: #c3b0ea;
+  padding-bottom: 12px;
+  font-size: 1rem;
+}
+
+.home-main {
+  display: grid;
+  grid-template-areas:
+    "wildy-gamy wildy-gamy"
+    "play-online game-list"
+    "play-online prizes";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 25vh 20vh 20vh;
+  gap: 1rem;
+}
+
+.wildy-gamy-home-container,
+.play-online-home-container,
+.game-list-home-container,
+.prizes-home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.wildy-gamy-home-container {
+  grid-area: wildy-gamy;
+  border-radius: 12px;
+  position: relative;
+  background-image: linear-gradient(
+      to right,
+      rgba(100, 3, 169, 1),
+      rgba(100, 3, 169, 1),
+      rgba(255, 255, 255, 0)
+    ), url("../assets/images/home_wildy_gamy.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.wildy-gamy-home-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: linear-gradient(to bottom, #9001f5, #c3b0ea) border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+.home-wildy-gamy-text {
+  font-family: "Inter", sans-serif;
+  font-size: 3vw;
+  text-align: start;
+}
+
+.home-play-online-text {
+  font-family: "Inter", sans-serif;
+  font-size: 3vw;
+  text-align: start;
+  color: black;
+}
+
+.home-game-list-text {
+  font-family: "Inter", sans-serif;
+  font-size: 3vw;
+  text-align: start;
+}
+
+.play-online-home-container {
+  grid-area: play-online;
+  border-radius: 12px;
+  position: relative;
+  background-image: linear-gradient(
+      to top,
+      rgba(221, 87, 210, 1),
+      rgba(221, 87, 210, 1),
+      rgba(221, 87, 210, 1),
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ), url("../assets/images/snakegame-image.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.play-online-home-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: linear-gradient(to bottom, #fe00ea, #f7a1f1) border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+.game-list-home-container {
+  grid-area: game-list;
+  border-radius: 12px;
+  position: relative;
+  background-image: linear-gradient(
+      to top,
+      rgba(37, 36, 158, 1),
+      rgba(37, 36, 158, 1),
+      rgba(255, 255, 255, 0)
+    ), url("../assets/images/home_game_list.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.game-list-home-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: linear-gradient(to bottom, #1e0eff, #8a8ef7) border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+.prizes-home-container {
+  grid-area: prizes;
+  border-radius: 12px;
+  position: relative;
+  background-image: linear-gradient(
+      to top,
+      rgba(203, 39, 116, 1),
+      rgba(203, 39, 116, 1),
+      rgba(255, 255, 255, 0)
+    ), url("../assets/images/home_prizes.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.prizes-home-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: linear-gradient(to bottom, #ff2d8f, #ffafda) border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+.home-bottom-container {
+  display: contents;
+}
+
+.home_grid-containers {
+  position: relative;
+  font-family: var(--font-title-phosphate);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--font-title-color);
+  font-size: 6vw;
+}
+
+.play-online-home-container {
+  color: black;
+}
+
+.blue-arrow-icon,
+.pink-arrow-icon,
+.purple-arrow-icon {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
