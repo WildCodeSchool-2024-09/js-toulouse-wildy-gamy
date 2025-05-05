@@ -3,6 +3,8 @@ import type { Request, Response } from "express";
 import nodemailer from "nodemailer";
 import { EmailRepository } from "./emailRepository"; // Adjust the path as necessary
 
+const emailRepository = new EmailRepository();
+
 dotenv.config(); // Charge les variables d'environnement depuis le fichier .env
 
 // Création du transporteur SMTP
@@ -67,13 +69,18 @@ ${message}
   }
 };
 
-export const getUnreadCount = async (req: Request, res: Response) => {
+export async function getUnreadCount(req: Request, res: Response) {
   try {
-    const emailRepo = new EmailRepository();
-    const count = await emailRepo.getUnreadCount();
-    res.status(200).json({ count });
+    const count = await emailRepository.getUnreadCount();
+    res.json({ count });
   } catch (error) {
     console.error("Erreur lors de la récupération des emails non lus:", error);
-    res.status(500).json({ error: "Erreur lors de la récupération" });
+
+    // Retourner un code d'erreur 503 Service Unavailable
+    // avec un compte de 0 pour que l'application continue de fonctionner
+    res.status(503).json({
+      error: "Service Gmail temporairement indisponible",
+      count: 0,
+    });
   }
-};
+}

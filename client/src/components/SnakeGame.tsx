@@ -456,7 +456,7 @@ export default function SnakeGame() {
           setDirection({ x: 1, y: 0 });
           break;
         case " ":
-          e.preventDefault(); // Empêche le défilement de la page
+          e.preventDefault();
           if (!gameOver) {
             setIsPaused((prevPaused) => !prevPaused);
           }

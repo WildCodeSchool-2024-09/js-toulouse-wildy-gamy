@@ -8,11 +8,12 @@ import {
   View,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/authContext";
 import "../../styles/admin/SliderBarAdmin.css";
+import { toast } from "react-toastify";
 import AlertModalAdmin from "../AlertModal";
 
 interface MenuItem {
@@ -31,7 +32,8 @@ interface SliderBarAdminProps {
 
 function SliderBarAdmin({ isOpen, onToggle, onClose }: SliderBarAdminProps) {
   const navigate = useNavigate();
-  const { setAuth } = useAuth() as unknown as {
+  const { user, setAuth } = useAuth() as unknown as {
+    user: { is_admin: boolean } | null;
     setAuth: (auth: null) => void;
   };
   const [modalConfig, setModalConfig] = useState<{
@@ -42,6 +44,83 @@ function SliderBarAdmin({ isOpen, onToggle, onClose }: SliderBarAdminProps) {
   } | null>(null);
   const [unreadCount, setUnreadCount] = useState(0);
 
+  // Fonction pour récupérer le nombre d'emails non lus
+  const fetchUnreadCount = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/emails/unread`,
+        {
+          credentials: "include",
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 503 && data.error) {
+          if (user?.is_admin) {
+            toast.warning(
+              "Le service de messagerie est temporairement indisponible. Veuillez vérifier les informations d'authentification Gmail.",
+              {
+                position: "top-center",
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnHover: true,
+                hideProgressBar: false,
+                theme: "colored",
+                style: {
+                  background: "#FFA500",
+                  color: "white",
+                },
+              },
+            );
+          }
+        }
+        // On continue en définissant unreadCount à 0
+        setUnreadCount(0);
+        return;
+      }
+
+      // Mettre à jour le unreadCount
+      setUnreadCount(data.count || 0);
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des emails non lus:",
+        error,
+      );
+      setUnreadCount(0);
+    }
+  }, [user]);
+
+  // Effet pour le rafraîchissement périodique
+  useEffect(() => {
+    // Rafraîchir immédiatement au chargement
+    fetchUnreadCount();
+
+    // Rafraîchir toutes les 30 secondes
+    const interval = setInterval(fetchUnreadCount, 30000);
+
+    // Nettoyer l'intervalle au démontage
+    return () => clearInterval(interval);
+  }, [fetchUnreadCount]); // Dépendance sur fetchUnreadCount uniquement
+
+  // Effet pour gérer la visibilité de la page
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        fetchUnreadCount();
+      }
+    };
+
+    // Écouter les changements de visibilité
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [fetchUnreadCount]);
+
+  // Configuration des éléments du menu
   const menuItems: MenuItem[] = [
     {
       id: 1,
@@ -52,8 +131,10 @@ function SliderBarAdmin({ isOpen, onToggle, onClose }: SliderBarAdminProps) {
           {unreadCount > 0 && <div className="mail-badge">{unreadCount}</div>}
         </div>
       ),
-      onClick: () =>
-        window.open("https://mail.google.com/mail/u/0/#inbox", "_blank"),
+      onClick: () => {
+        window.open("https://mail.google.com/mail/u/0/#inbox", "_blank");
+        setTimeout(fetchUnreadCount, 5000);
+      },
     },
     {
       id: 2,
@@ -74,27 +155,6 @@ function SliderBarAdmin({ isOpen, onToggle, onClose }: SliderBarAdminProps) {
       link: "/admin/prizes",
     },
   ];
-
-  useEffect(() => {
-    const fetchUnreadCount = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/emails/unread`,
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setUnreadCount(data.count);
-      } catch (error) {
-        console.error("Erreur fetch:", error);
-      }
-    };
-
-    fetchUnreadCount();
-    const interval = setInterval(fetchUnreadCount, 300000);
-    return () => clearInterval(interval);
-  }, []);
 
   const logoutUser = () => {
     setAuth(null);
